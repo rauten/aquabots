@@ -35,7 +35,7 @@ void PVector::normalize() {
 }
 
 
-
+//Dot product
 double PVector::dot(PVector p) {
   return x * p.x + y * p.y + z * p.z;
 }

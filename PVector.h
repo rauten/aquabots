@@ -21,14 +21,16 @@ class PVector {
   public:
     /* Global Variables */
     double x, y, z;
+
+
     // constructor
-    PVector();
-    PVector(double _x, double _y, double _z);
+    PVector(); //Empty constructor
+    PVector(double _x, double _y, double _z); //x,y,z position vector
     // function
-    void add(PVector p);
-    void normalize();
-    double dot(PVector p);
-    double dist(PVector p);
+    void add(PVector p);  //Updates existing p vector
+    void normalize();     //Finds the normalized vector
+    double dot(PVector p); //Finds the dot product
+    double dist(PVector p); //Distance
 
   private:
 

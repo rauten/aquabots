@@ -12,19 +12,38 @@
 /***************************************************/
 #include "Arm7Bot.h"
 
+/*
+ * pinMode() : Configures a specified pin to act as an input or an output
+ * digitalWrite() : Writes a HIGH or LOW value to a digital pin
+ * analogWriteResolution() : Sets the resolution of the analogWrite() function. Defaults to 8 bits
+ * analogWrite() : Writes an analog value (PWM wave) to a pin. This can be used to control a motor
+
+*/
 
 
 Arm7Bot::Arm7Bot() {
   // intitialize parameters
   for (int i = 0; i < SERVO_NUM; i++) {
     offset[i] = offsetInit[i];
-    posG[i] = INITIAL_POS[i];
+    posG[i] = INITIAL_POS[i];  //Sets the position to the initial position
     isFluent[i] = true;
-    fluentRange[i] = fluentRangeInit[i];
+    fluentRange[i] = fluentRangeInit[i];  //Sets the fluent range to the default fluent range
     filterData[i] = 0;
   }
 
-  analogWriteResolution(12);  // for Due
+  analogWriteResolution(12);  //Sets resolution to 12 bits (for Arduino Due)
+
+  /*The Due has 12 pins defaulted to 8-bits (the above code changes them to 12-bits)
+    Setting the Due pins to 12 bits utilizes the full DAC (Digitial to Analog Converter) resolution
+    Utilizes PWM (Pulse Width Modulation) which can be used to control the following:
+        *Dimming an LED
+        *Providing an analog output
+        *Generating audio signals
+        *Providing variable speed control for motors <--- What we are using this for
+
+  */
+
+
   
   // initalize elements
   btAndBuzInit();
@@ -34,11 +53,12 @@ Arm7Bot::Arm7Bot() {
 }
 
 // Initial vacuum cup
+
+
 void Arm7Bot::vacuumCupInit() {
-  pinMode(valve_pin, OUTPUT);
-  pinMode(pump_pin, OUTPUT);
+  pinMode(valve_pin, OUTPUT);  //valve_pin = 10, OUTPUT = 0x1
   digitalWrite(valve_pin, LOW);
-  digitalWrite(pump_pin, LOW);
+  digitalWrite(pump_pin, LOW); //pump_pin = 11, LOW = 0x0
 }
 
 // Read storage data from flash
