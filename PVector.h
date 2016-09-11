@@ -23,7 +23,7 @@ class PVector {
     double x, y, z;
     // constructor
     PVector();
-    PVector(double _x, double _y, double _z);
+    PVector(double _x, double _y, double _z); 
     // function
     void add(PVector p);
     void normalize();
